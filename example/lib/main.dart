@@ -256,7 +256,8 @@ class _GameScreenState extends State<GameScreen>
                     child: SpinnerWheel(
                       controller: controller,
                       segments: _segments,
-                      onComplete: (win) {
+                      onComplete: (win,index) {
+                        print("index......$index");
                         setState(() {
                           if (win.value == -9999) {
                             _score = 0;

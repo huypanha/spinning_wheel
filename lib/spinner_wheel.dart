@@ -10,7 +10,7 @@ import '../controller/spin_controller.dart';
 class SpinnerWheel extends StatefulWidget {
   final SpinnerController controller;
   final List<WheelSegment> segments;
-  final Function(WheelSegment) onComplete;
+  final Function(WheelSegment,int) onComplete;
   final Color? wheelColor;
   final Color? indicatorColor;
   final Widget? centerChild;
@@ -49,7 +49,8 @@ class SpinnerWheelState extends State<SpinnerWheel> with SingleTickerProviderSta
     _controller = createSpinController(this,(){
       setState(() {
         _startRotation = _endRotation % (2 * pi);
-        widget.onComplete(determineSegment(widget.segments,_endRotation));
+        int wheelIndex = determineSegment(widget.segments,_endRotation);
+        widget.onComplete(widget.segments[wheelIndex],wheelIndex);
       });
     },(){setState(() {});});
     super.initState();

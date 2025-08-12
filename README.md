@@ -4,8 +4,6 @@
 
 A fully customizable spinning wheel for Flutter applications! Easily create fortune wheels, prize spinners, or game-based random selectors with smooth animations and custom segments.
 
----
-
 ## 🌟 Features
 
 - ✅ **Fully customizable spinning wheel** 🎨
@@ -13,12 +11,11 @@ A fully customizable spinning wheel for Flutter applications! Easily create fort
 - ✅ **Smooth animation with realistic spin physics** 🎯
 - ✅ **Callback for detecting spin completion** 🔥
 
----
-## Image
+## 📸 Preview
 
-![Alt text](https://github.com/nitesh695/spinning_wheel/blob/main/example/assets/images/img.png)
-
----
+<div align="center">
+  <img src="https://github.com/nitesh695/spinning_wheel/blob/main/example/assets/images/img.png" alt="Spinning Wheel Demo" style="width: 100%; max-width: 500px;">
+</div>
 
 ## 📦 Installation
 
@@ -27,7 +24,7 @@ Add this package to your `pubspec.yaml`:
 ```yaml
 dependencies:
   spinning_wheel: latest_version
- ```
+```
 
 ## 🔧 Usage
 
@@ -61,8 +58,8 @@ SpinnerWheel(
   controller: controller,
   segments: segments,
   wheelColor: Colors.white,
-  onComplete: (result) {
-    print("You won: ${result.label}");
+  onComplete: (result, index) {
+    print("You won: ${result.label}...$index");
   },
 ),
 ```
@@ -73,7 +70,7 @@ SpinnerWheel(
 controller.startSpin();
 ```
 
-### 📜 API Reference
+## 📜 API Reference
 
 | Property            | Type                     | Description                                     | Default    |
 |---------------------|--------------------------|-------------------------------------------------|------------|
@@ -88,12 +85,9 @@ controller.startSpin();
 | `imageWidth`        | `double?`                | Width of the image of segment                   | Optional   |
 | `labelStyle`        | `TextStyle?`             | Text Style for the label of segments            | Optional   |
 
-
 ## 📄 License
 
 This package is licensed under the **MIT License**.
-
----
 
 ## 🙏 Support
 

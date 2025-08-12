@@ -5,3 +5,7 @@
 ## 0.0.2
 
 * SetState issue of view fixed.
+
+## 0.0.3
+
+* Wheel responsiveness is fixed.

@@ -16,11 +16,11 @@ SpinResult spinWheel(double startRotation) {
   return SpinResult(startRotation, endRotation);
 }
 
-WheelSegment determineSegment(List<WheelSegment> segments, double endRotation) {
+int determineSegment(List<WheelSegment> segments, double endRotation) {
   final double normalizedAngle = endRotation % (2 * pi);
   final double segmentAngle = 2 * pi / segments.length;
   final double invertedAngle = 2 * pi - normalizedAngle;
   final int segmentIndex = (invertedAngle ~/ segmentAngle) % segments.length;
 
-  return segments[segmentIndex];
+  return segmentIndex;
 }
