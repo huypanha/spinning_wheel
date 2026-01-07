@@ -271,8 +271,15 @@ class _GameScreenState extends State<GameScreen>
                     child: SpinnerWheel(
                       controller: controller,
                       segments: _segments,
-                      // shouldDrawBackground: false,
-                      // backgroundImage: AssetImage('assets/images/test_wheel.png'),
+                      // shouldDrawBackground: true,
+                      // background: Image.asset('assets/images/test_wheel.png'),
+                      // background: Container(
+                      //   decoration: BoxDecoration(
+                      //       shape: BoxShape.circle,
+                      //     color: Colors.orange
+                      //   ),
+                      //   padding: EdgeInsets.all(20),
+                      // ),
                       onComplete: (win, index) {
                         print("index......$index");
                         setState(() {

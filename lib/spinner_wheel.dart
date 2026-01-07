@@ -18,7 +18,7 @@ class SpinnerWheel extends StatefulWidget {
   final double? imageHeight;
   final double? imageWidth;
   final TextStyle? labelStyle;
-  final ImageProvider? backgroundImage;
+  final Widget? background;
   final bool shouldDrawBackground;
 
   const SpinnerWheel({
@@ -33,7 +33,7 @@ class SpinnerWheel extends StatefulWidget {
     this.imageHeight,
     this.imageWidth,
     this.labelStyle,
-    this.backgroundImage,
+    this.background,
     this.shouldDrawBackground = true,
   });
 
@@ -97,7 +97,7 @@ class SpinnerWheelState extends State<SpinnerWheel>
       imageHeight: widget.imageHeight,
       imageWidth: widget.imageWidth,
       labelStyle: widget.labelStyle,
-      backgroundImage: widget.backgroundImage,
+      background: widget.background,
       shouldDrawBackground: widget.shouldDrawBackground,
     );
   }

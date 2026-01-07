@@ -19,7 +19,7 @@ class WheelDisplay extends StatelessWidget {
   final double minSize;
   final double maxSize;
   final double aspectRatio;
-  final ImageProvider? backgroundImage;
+  final Widget? background;
   final bool shouldDrawBackground;
 
   const WheelDisplay({
@@ -38,7 +38,7 @@ class WheelDisplay extends StatelessWidget {
     this.minSize = 100.0,
     this.maxSize = double.infinity,
     this.aspectRatio = 1.0,
-    this.backgroundImage,
+    this.background,
     this.shouldDrawBackground = true,
   });
 
@@ -90,16 +90,16 @@ class WheelDisplay extends StatelessWidget {
               SizedBox(
                 width: size,
                 height: size,
-                child: FittedBox(
-                  fit: BoxFit.contain,
-                  child: Image(
-                    image: backgroundImage ??
-                        const AssetImage('assets/wheel.png',
-                            package: 'spinning_wheel'),
-                    fit: BoxFit.contain,
-                    color: wheelColor,
-                  ),
-                ),
+                child: background ??
+                    FittedBox(
+                      fit: BoxFit.contain,
+                      child: Image.asset(
+                        'assets/wheel.png',
+                        package: 'spinning_wheel',
+                        fit: BoxFit.contain,
+                        color: wheelColor,
+                      ),
+                    ),
               ),
             // Rotating wheel content
             SizedBox(
