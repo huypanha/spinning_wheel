@@ -66,18 +66,6 @@ class _GameScreenState extends State<GameScreen>
         color: const Color(0xFF4E342E),
         path: 'assets/images/bat.png',
         probability: 0.7),
-    WheelSegment('11', 11,
-        color: const Color(0xFF8BEA0B),
-        path: 'assets/images/bat.png',
-        probability: 0.7),
-    WheelSegment('22', 22,
-        color: const Color(0xFF0233FF),
-        path: 'assets/images/bat.png',
-        probability: 0.7),
-    WheelSegment('33', 33,
-        color: const Color(0xFFB607E7),
-        path: 'assets/images/bat.png',
-        probability: 0.7), // 5%
   ];
 
   @override

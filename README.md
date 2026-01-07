@@ -44,10 +44,10 @@ final SpinnerController controller = SpinnerController();
 
 ```dart
 List<WheelSegment> segments = [
-  WheelSegment("Prize 1", Colors.red, 10),
-  WheelSegment("Prize 2", Colors.blue, 20),
-  WheelSegment("Prize 3", Colors.green, 30),
-  WheelSegment("Prize 4", Colors.orange, 40),
+  WheelSegment("Prize 1", 10, color: Colors.red, probability: 0.5), // 50% chance
+  WheelSegment("Prize 2", 20, color: Colors.blue, probability: 0.3), // 30% chance
+  WheelSegment("Prize 3", 30, color: Colors.green, probability: 0.2), // 20% chance
+  WheelSegment("Prize 4", 40), // Random color, lower probability if not specified
 ];
 ```
 
@@ -58,6 +58,8 @@ SpinnerWheel(
   controller: controller,
   segments: segments,
   wheelColor: Colors.white,
+  background: Image.asset('assets/wheel.png'), // Custom background widget
+  shouldDrawBackground: true, // Toggle background visibility
   onComplete: (result, index) {
     print("You won: ${result.label}...$index");
   },
@@ -76,7 +78,7 @@ controller.startSpin();
 |---------------------|--------------------------|-------------------------------------------------|------------|
 | `controller`        | `SpinnerController`      | Controls the spin animation                     | Required   |
 | `segments`          | `List<WheelSegment>`     | List of wheel segments (labels, colors, images) | Required   |
-| `wheelColor`        | `Color?`                 | Background color of the wheel                   | Optional   |
+| `wheelColor`        | `Color?`                 | Background color of the wheel tint              | Optional   |
 | `onComplete`        | `Function(WheelSegment)` | Callback triggered when spin completes          | Required   |
 | `centerChild`       | `Widget?`                | Custom widget for the wheel center              | Optional   |
 | `indicator`         | `Widget?`                | Custom widget for the indicator                 | Optional   |
@@ -84,6 +86,8 @@ controller.startSpin();
 | `imageHeight`       | `double?`                | Height of the image of segment                  | Optional   |
 | `imageWidth`        | `double?`                | Width of the image of segment                   | Optional   |
 | `labelStyle`        | `TextStyle?`             | Text Style for the label of segments            | Optional   |
+| `background`        | `Widget?`                | Custom widget for the wheel background layer    | Optional   |
+| `shouldDrawBackground`| `bool`                 | Toggle to hide/show the background layer        | `true`     |
 
 ## 📄 License
 

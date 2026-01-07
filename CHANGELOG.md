@@ -8,4 +8,10 @@
 
 ## 0.0.3
 
-* Wheel responsiveness is fixed.
+## 0.0.4
+* Added `background` parameter to `SpinnerWheel` for custom background widgets.
+* Added `shouldDrawBackground` to toggle background visibility.
+* Added weighted probability support (`probability` field in `WheelSegment`).
+* Added performance optimizations (`RepaintBoundary`) for smoother animations.
+* Made `color` optional in `WheelSegment` (defaults to random color).
+
