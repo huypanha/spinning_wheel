@@ -42,18 +42,42 @@ class _GameScreenState extends State<GameScreen>
   bool _showConfetti = false;
 
   final List<WheelSegment> _segments = [
-    WheelSegment('+1 spin', const Color(0xFFEC8484), 1,
-        path: 'assets/images/coala.png'), // Soft White
-    WheelSegment('50', const Color(0xFF1E88E5), 50,
-        path: 'assets/images/bunny.png'), // Royal Blue
-    WheelSegment('200', const Color(0xFF00C853), 200,
-        path: 'assets/images/lion.png'), // Emerald Green
-    WheelSegment('10', const Color(0xFFFFD700), 10,
-        path: 'assets/images/cheeseMouse.png'), // Gold
-    WheelSegment('0', const Color(0xFFFF6D00), 0,
-        path: 'assets/images/elephent.png'), // Bright Orange
-    WheelSegment('LOSE ALL', const Color(0xFF4E342E), -9999,
-        path: 'assets/images/bat.png'), // Deep Chocolate Brown
+    WheelSegment('+1 spin', 1,
+        color: const Color(0xFFEC8484),
+        path: 'assets/images/coala.png',
+        probability: 0.01), // 1% chance
+    WheelSegment('50', 50,
+        color: const Color(0xFF1E88E5),
+        path: 'assets/images/bunny.png',
+        probability: 0.2), // 20%
+    WheelSegment('200', 200,
+        color: const Color(0xFF00C853),
+        path: 'assets/images/lion.png',
+        probability: 0.05), // 5%
+    WheelSegment('10', 10,
+        color: const Color(0xFFFFD700),
+        path: 'assets/images/cheeseMouse.png',
+        probability: 0.2), // 20%
+    WheelSegment('0', 0,
+        color: const Color(0xFFFF6D00),
+        path: 'assets/images/elephent.png',
+        probability: 0.1), // 10%
+    WheelSegment('LOSE ALL', -9999,
+        color: const Color(0xFF4E342E),
+        path: 'assets/images/bat.png',
+        probability: 0.7),
+    WheelSegment('11', 11,
+        color: const Color(0xFF8BEA0B),
+        path: 'assets/images/bat.png',
+        probability: 0.7),
+    WheelSegment('22', 22,
+        color: const Color(0xFF0233FF),
+        path: 'assets/images/bat.png',
+        probability: 0.7),
+    WheelSegment('33', 33,
+        color: const Color(0xFFB607E7),
+        path: 'assets/images/bat.png',
+        probability: 0.7), // 5%
   ];
 
   @override
@@ -247,7 +271,8 @@ class _GameScreenState extends State<GameScreen>
                     child: SpinnerWheel(
                       controller: controller,
                       segments: _segments,
-                      backgroundImage: AssetImage('assets/images/test_wheel.png'),
+                      // shouldDrawBackground: false,
+                      // backgroundImage: AssetImage('assets/images/test_wheel.png'),
                       onComplete: (win, index) {
                         print("index......$index");
                         setState(() {

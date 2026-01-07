@@ -20,6 +20,7 @@ class WheelDisplay extends StatelessWidget {
   final double maxSize;
   final double aspectRatio;
   final ImageProvider? backgroundImage;
+  final bool shouldDrawBackground;
 
   const WheelDisplay({
     super.key,
@@ -38,6 +39,7 @@ class WheelDisplay extends StatelessWidget {
     this.maxSize = double.infinity,
     this.aspectRatio = 1.0,
     this.backgroundImage,
+    this.shouldDrawBackground = true,
   });
 
   @override
@@ -84,26 +86,41 @@ class WheelDisplay extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             // Wheel background image
-            SizedBox(
-              width: size,
-              height: size,
-              child: FittedBox(
-                fit: BoxFit.contain,
-                child: Image(
-                  image: backgroundImage ??
-                      const AssetImage('assets/wheel.png',
-                          package: 'spinning_wheel'),
+            if (shouldDrawBackground)
+              SizedBox(
+                width: size,
+                height: size,
+                child: FittedBox(
                   fit: BoxFit.contain,
-                  color: wheelColor,
+                  child: Image(
+                    image: backgroundImage ??
+                        const AssetImage('assets/wheel.png',
+                            package: 'spinning_wheel'),
+                    fit: BoxFit.contain,
+                    color: wheelColor,
+                  ),
                 ),
               ),
-            ),
             // Rotating wheel content
             SizedBox(
               width: size,
               height: size,
               child: AnimatedBuilder(
                 animation: controller,
+                child: RepaintBoundary(
+                  child: Padding(
+                    padding: EdgeInsets.all(size * 0.094),
+                    child: CustomPaint(
+                      size: Size(size, size),
+                      painter: WheelPainter(
+                        segments,
+                        imageHeight: imageHeight ?? (size * 0.11),
+                        imageWidth: imageWidth ?? (size * 0.11),
+                        style: _getResponsiveLabelStyle(size),
+                      ),
+                    ),
+                  ),
+                ),
                 builder: (context, child) {
                   return Transform.rotate(
                     angle: Tween(begin: startRotation, end: endRotation)
@@ -114,18 +131,7 @@ class WheelDisplay extends StatelessWidget {
                           ),
                         )
                         .value,
-                    child: Padding(
-                      padding: EdgeInsets.all(size * 0.094),
-                      child: CustomPaint(
-                        size: Size(size, size),
-                        painter: WheelPainter(
-                          segments,
-                          imageHeight: imageHeight ?? (size * 0.11),
-                          imageWidth: imageWidth ?? (size * 0.11),
-                          style: _getResponsiveLabelStyle(size),
-                        ),
-                      ),
-                    ),
+                    child: child,
                   );
                 },
               ),

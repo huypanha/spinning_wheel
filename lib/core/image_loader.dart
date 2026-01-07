@@ -10,17 +10,19 @@ Future<ui.Image> loadImage(String path) async {
   return frame.image;
 }
 
-Future<List<WheelSegment>> loadSegmentImages(List<WheelSegment> segments) async {
+Future<List<WheelSegment>> loadSegmentImages(
+    List<WheelSegment> segments) async {
   List<WheelSegment> processedSegments = [];
 
   for (var segment in segments) {
     if ((segment.path ?? '').isNotEmpty) {
       processedSegments.add(WheelSegment(
         segment.label,
-        segment.color,
         segment.value,
+        color: segment.color,
         path: segment.path,
         image: await loadImage(segment.path!),
+        probability: segment.probability,
       ));
     } else {
       processedSegments.add(segment);

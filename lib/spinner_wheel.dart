@@ -19,6 +19,7 @@ class SpinnerWheel extends StatefulWidget {
   final double? imageWidth;
   final TextStyle? labelStyle;
   final ImageProvider? backgroundImage;
+  final bool shouldDrawBackground;
 
   const SpinnerWheel({
     super.key,
@@ -33,6 +34,7 @@ class SpinnerWheel extends StatefulWidget {
     this.imageWidth,
     this.labelStyle,
     this.backgroundImage,
+    this.shouldDrawBackground = true,
   });
 
   @override
@@ -55,8 +57,6 @@ class SpinnerWheelState extends State<SpinnerWheel>
         int wheelIndex = determineSegment(widget.segments, _endRotation);
         widget.onComplete(widget.segments[wheelIndex], wheelIndex);
       });
-    }, () {
-      setState(() {});
     });
     super.initState();
   }
@@ -70,8 +70,10 @@ class SpinnerWheelState extends State<SpinnerWheel>
 
   Future<void> startSpin() async {
     _controller.reset();
-    final result = spinWheel(_startRotation);
-    _endRotation = result.end;
+    final result = spinWheel(_startRotation, widget.segments);
+    setState(() {
+      _endRotation = result.end;
+    });
     _controller.forward();
   }
 
@@ -96,6 +98,7 @@ class SpinnerWheelState extends State<SpinnerWheel>
       imageWidth: widget.imageWidth,
       labelStyle: widget.labelStyle,
       backgroundImage: widget.backgroundImage,
+      shouldDrawBackground: widget.shouldDrawBackground,
     );
   }
 }

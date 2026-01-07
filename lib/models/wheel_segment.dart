@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
@@ -5,8 +6,12 @@ class WheelSegment {
   final String label;
   final Color color;
   final int value;
-  String? path;
-  ui.Image? image;
+  final String? path;
+  final ui.Image? image;
+  final double? probability;
 
-  WheelSegment(this.label, this.color, this.value, {this.path, this.image});
+  WheelSegment(this.label, this.value,
+      {Color? color, this.path, this.image, this.probability})
+      : color = color ??
+            Colors.primaries[Random().nextInt(Colors.primaries.length)];
 }
