@@ -10,7 +10,7 @@ import '../controller/spin_controller.dart';
 class SpinnerWheel extends StatefulWidget {
   final SpinnerController controller;
   final List<WheelSegment> segments;
-  final Function(WheelSegment,int) onComplete;
+  final Function(WheelSegment, int) onComplete;
   final Color? wheelColor;
   final Color? indicatorColor;
   final Widget? centerChild;
@@ -18,6 +18,7 @@ class SpinnerWheel extends StatefulWidget {
   final double? imageHeight;
   final double? imageWidth;
   final TextStyle? labelStyle;
+  final ImageProvider? backgroundImage;
 
   const SpinnerWheel({
     super.key,
@@ -31,13 +32,15 @@ class SpinnerWheel extends StatefulWidget {
     this.imageHeight,
     this.imageWidth,
     this.labelStyle,
+    this.backgroundImage,
   });
 
   @override
   State<SpinnerWheel> createState() => SpinnerWheelState();
 }
 
-class SpinnerWheelState extends State<SpinnerWheel> with SingleTickerProviderStateMixin {
+class SpinnerWheelState extends State<SpinnerWheel>
+    with SingleTickerProviderStateMixin {
   List<WheelSegment> processedSegments = [];
   late AnimationController _controller;
   double _startRotation = 0.0, _endRotation = 0.0;
@@ -46,19 +49,21 @@ class SpinnerWheelState extends State<SpinnerWheel> with SingleTickerProviderSta
   void initState() {
     widget.controller.attachState(this);
     processSegments();
-    _controller = createSpinController(this,(){
+    _controller = createSpinController(this, () {
       setState(() {
         _startRotation = _endRotation % (2 * pi);
-        int wheelIndex = determineSegment(widget.segments,_endRotation);
-        widget.onComplete(widget.segments[wheelIndex],wheelIndex);
+        int wheelIndex = determineSegment(widget.segments, _endRotation);
+        widget.onComplete(widget.segments[wheelIndex], wheelIndex);
       });
-    },(){setState(() {});});
+    }, () {
+      setState(() {});
+    });
     super.initState();
   }
 
   void processSegments() async {
     processedSegments = await loadSegmentImages(widget.segments);
-    if(mounted){
+    if (mounted) {
       setState(() {});
     }
   }
@@ -90,6 +95,7 @@ class SpinnerWheelState extends State<SpinnerWheel> with SingleTickerProviderSta
       imageHeight: widget.imageHeight,
       imageWidth: widget.imageWidth,
       labelStyle: widget.labelStyle,
+      backgroundImage: widget.backgroundImage,
     );
   }
 }

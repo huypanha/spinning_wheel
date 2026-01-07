@@ -14,7 +14,7 @@ A fully customizable spinning wheel for Flutter applications! Easily create fort
 ## 📸 Preview
 
 <div align="center">
-  <img src="https://github.com/nitesh695/spinning_wheel/blob/main/example/assets/images/img.png" alt="Spinning Wheel Demo" style="width: 100%; max-width: 500px;">
+  <img src="https://raw.githubusercontent.com/nitesh695/spinning_wheel/main/example/assets/images/img.png" alt="Spinning Wheel Demo" style="width: 100%; max-width: 500px;">
 </div>
 
 ## 📦 Installation

@@ -19,6 +19,7 @@ class WheelDisplay extends StatelessWidget {
   final double minSize;
   final double maxSize;
   final double aspectRatio;
+  final ImageProvider? backgroundImage;
 
   const WheelDisplay({
     super.key,
@@ -36,6 +37,7 @@ class WheelDisplay extends StatelessWidget {
     this.minSize = 100.0,
     this.maxSize = double.infinity,
     this.aspectRatio = 1.0,
+    this.backgroundImage,
   });
 
   @override
@@ -87,8 +89,10 @@ class WheelDisplay extends StatelessWidget {
               height: size,
               child: FittedBox(
                 fit: BoxFit.contain,
-                child: Image.asset(
-                  'packages/spinning_wheel/assets/wheel.png',
+                child: Image(
+                  image: backgroundImage ??
+                      const AssetImage('assets/wheel.png',
+                          package: 'spinning_wheel'),
                   fit: BoxFit.contain,
                   color: wheelColor,
                 ),
@@ -104,11 +108,11 @@ class WheelDisplay extends StatelessWidget {
                   return Transform.rotate(
                     angle: Tween(begin: startRotation, end: endRotation)
                         .animate(
-                      CurvedAnimation(
-                        parent: controller,
-                        curve: Curves.easeOutCirc,
-                      ),
-                    )
+                          CurvedAnimation(
+                            parent: controller,
+                            curve: Curves.easeOutCirc,
+                          ),
+                        )
                         .value,
                     child: Padding(
                       padding: EdgeInsets.all(size * 0.094),
