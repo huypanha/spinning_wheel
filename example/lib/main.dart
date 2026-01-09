@@ -48,7 +48,8 @@ class _GameScreenState extends State<GameScreen>
         probability: 0.01), // 1% chance
     WheelSegment('50', 50,
         color: const Color(0xFF1E88E5),
-        path: 'assets/images/bunny.png',
+        path:
+            'https://cdn-icons-png.flaticon.com/512/3273/3273898.png',
         probability: 0.2), // 20%
     WheelSegment('200', 200,
         color: const Color(0xFF00C853),
