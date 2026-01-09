@@ -1,12 +1,22 @@
 import 'dart:math';
 import '../models/wheel_segment.dart';
 
+/// Holds the calculation results for a wheel spin animation.
 class SpinResult {
+  /// The starting rotation angle in radians.
   final double start;
+
+  /// The final calculated rotation angle in radians.
   final double end;
+
+  /// Creates a [SpinResult].
   SpinResult(this.start, this.end);
 }
 
+/// Calculates the target [end] rotation for a spin based on weighted probabilities.
+///
+/// [startRotation] is the current angle of the wheel.
+/// [segments] is the list of wheel slices to calculate against.
 SpinResult spinWheel(double startRotation, List<WheelSegment> segments) {
   // Use Random.secure() for cryptographically secure randomness (better fairness)
   final Random random = Random.secure();
@@ -77,6 +87,7 @@ SpinResult spinWheel(double startRotation, List<WheelSegment> segments) {
   return SpinResult(startRotation, endRotation);
 }
 
+/// Determines which segment index is at the top position based on the final [endRotation].
 int determineSegment(List<WheelSegment> segments, double endRotation) {
   final double normalizedAngle = endRotation % (2 * pi);
   final double segmentAngle = 2 * pi / segments.length;

@@ -7,8 +7,10 @@ A fully customizable spinning wheel for Flutter applications! Easily create fort
 ## 🌟 Features
 
 - ✅ **Fully customizable spinning wheel** 🎨
+- ✅ **Dual Image Support** (Local Assets & Network URLs) 🖼️🌐
 - ✅ **Supports text labels, colors, and images** 🖼️
 - ✅ **Smooth animation with realistic spin physics** 🎯
+- ✅ **Weighted Probability Support** (Control win frequencies) ⚖️
 - ✅ **Callback for detecting spin completion** 🔥
 
 ## 📸 Preview
@@ -46,8 +48,9 @@ final SpinnerController controller = SpinnerController();
 List<WheelSegment> segments = [
   WheelSegment("Prize 1", 10, color: Colors.red, probability: 0.5), // 50% chance
   WheelSegment("Prize 2", 20, color: Colors.blue, probability: 0.3), // 30% chance
+  // Supports Network Images! 🌐
+  WheelSegment("Gift", 100, path: "https://example.com/gift_icon.png"), 
   WheelSegment("Prize 3", 30, color: Colors.green, probability: 0.2), // 20% chance
-  WheelSegment("Prize 4", 40), // Random color, lower probability if not specified
 ];
 ```
 

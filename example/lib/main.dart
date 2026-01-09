@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spinning_wheel/controller/spin_controller.dart';
-import 'package:spinning_wheel/spinning_wheel.dart'; // Import your package
-import 'package:flutter/animation.dart'; // Animation controller
+import 'package:spinning_wheel/spinning_wheel.dart';
 
 void main() {
   runApp(MyApp());
@@ -48,8 +46,7 @@ class _GameScreenState extends State<GameScreen>
         probability: 0.01), // 1% chance
     WheelSegment('50', 50,
         color: const Color(0xFF1E88E5),
-        path:
-            'https://cdn-icons-png.flaticon.com/512/3273/3273898.png',
+        path: 'https://cdn-icons-png.flaticon.com/512/3273/3273898.png',
         probability: 0.2), // 20%
     WheelSegment('200', 200,
         color: const Color(0xFF00C853),
@@ -87,7 +84,8 @@ class _GameScreenState extends State<GameScreen>
   }
 
   void _showGameOverDialog() {
-    Future.delayed(Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
+      if (!mounted) return;
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -260,7 +258,7 @@ class _GameScreenState extends State<GameScreen>
                     child: SpinnerWheel(
                       controller: controller,
                       segments: _segments,
-                      // shouldDrawBackground: true,
+                      // shouldDrawBackground: false,
                       // background: Image.asset('assets/images/test_wheel.png'),
                       // background: Container(
                       //   decoration: BoxDecoration(

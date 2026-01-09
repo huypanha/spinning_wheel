@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// A custom clipper that creates a downward-pointing triangle shape,
+/// commonly used for the wheel's indicator/pointer.
 class TriangleBottomClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
@@ -7,9 +9,11 @@ class TriangleBottomClipper extends CustomClipper<Path> {
 
     path.moveTo(0, 0); // Top-left corner
     path.lineTo(size.width, 0); // Top-right corner
-    path.lineTo(size.width, size.height - size.height * 0.2); // Bottom-right before triangle
+    path.lineTo(size.width,
+        size.height - size.height * 0.2); // Bottom-right before triangle
     path.lineTo(size.width / 2, size.height); // Bottom triangle tip (sharp)
-    path.lineTo(0, size.height - size.height * 0.2); // Bottom-left before triangle
+    path.lineTo(
+        0, size.height - size.height * 0.2); // Bottom-left before triangle
     path.close(); // Complete the path
 
     return path;

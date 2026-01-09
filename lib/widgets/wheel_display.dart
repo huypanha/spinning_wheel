@@ -4,24 +4,57 @@ import 'package:spinning_wheel/widgets/wheel_painter.dart';
 import '../models/wheel_segment.dart';
 import 'indicator.dart';
 
+/// Internal widget that handles the layout and rendering of the wheel components.
 class WheelDisplay extends StatelessWidget {
+  /// The [AnimationController] driving the wheel's rotation.
   final AnimationController controller;
+
+  /// The list of segments to draw.
   final List<WheelSegment> segments;
+
+  /// The starting rotation angle.
   final double startRotation;
+
+  /// The target end rotation angle.
   final double endRotation;
+
+  /// Optional widget to display in the center hub.
   final Widget? centerChild;
+
+  /// Optional custom indicator widget.
   final Widget? indicator;
+
+  /// Tint color for the default wheel asset.
   final Color? wheelColor;
+
+  /// Background color for the default indicator.
   final Color? indicatorColor;
+
+  /// Fixed height for segment images.
   final double? imageHeight;
+
+  /// Fixed width for segment images.
   final double? imageWidth;
+
+  /// Text style for segment labels.
   final TextStyle? labelStyle;
+
+  /// Minimum allowed size for the wheel.
   final double minSize;
+
+  /// Maximum allowed size for the wheel.
   final double maxSize;
+
+  /// Aspect ratio for the wheel (default 1.0).
   final double aspectRatio;
+
+  /// Custom background widget.
   final Widget? background;
+
+  /// Whether to render the background layer.
   final bool shouldDrawBackground;
 
+  /// Creates a [WheelDisplay].
   const WheelDisplay({
     super.key,
     required this.controller,

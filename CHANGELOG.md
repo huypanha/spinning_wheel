@@ -15,3 +15,6 @@
 * Added performance optimizations (`RepaintBoundary`) for smoother animations.
 * Made `color` optional in `WheelSegment` (defaults to random color).
 
+## 0.0.5
+* **Dual Image Support**: Pass both local asset paths and Network URLs (e.g., `https://...`) to `WheelSegment`.
+* Improved `image_loader` logic to automatically detect and fetch network images.

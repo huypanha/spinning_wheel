@@ -31,6 +31,7 @@ Future<ui.Image> loadImage(String path) async {
   return completer.future;
 }
 
+/// Iterates through a list of [WheelSegment]s and loads icons for those with a valid path.
 Future<List<WheelSegment>> loadSegmentImages(
     List<WheelSegment> segments) async {
   List<WheelSegment> processedSegments = [];
