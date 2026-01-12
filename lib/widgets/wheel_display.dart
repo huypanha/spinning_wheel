@@ -55,6 +55,9 @@ class WheelDisplay extends StatelessWidget {
   /// Whether to render the background layer.
   final bool shouldDrawBackground;
 
+  /// Radial padding within segments.
+  final EdgeInsets slicePadding;
+
   /// Creates a [WheelDisplay].
   const WheelDisplay({
     super.key,
@@ -74,6 +77,7 @@ class WheelDisplay extends StatelessWidget {
     this.aspectRatio = 1.0,
     this.background,
     this.shouldDrawBackground = true,
+    this.slicePadding = EdgeInsets.zero,
   });
 
   @override
@@ -153,6 +157,7 @@ class WheelDisplay extends StatelessWidget {
                         labelStyle: labelStyle ??
                             WheelLabelStyle(
                                 labelStyle: _getResponsiveLabelStyle(size)),
+                        slicePadding: slicePadding,
                       ),
                     ),
                   ),

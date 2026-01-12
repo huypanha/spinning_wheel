@@ -42,7 +42,7 @@ class _GameScreenState extends State<GameScreen>
   bool _showConfetti = false;
 
   final List<WheelSegment> _segments = [
-    WheelSegment('+1 spin', 1,
+    WheelSegment('JACKPOT WINNER!', 1000,
         color: const Color(0xFFEC8484),
         path: 'assets/images/coala.png',
         probability: 0.01), // 1% chance
@@ -261,13 +261,16 @@ class _GameScreenState extends State<GameScreen>
                       controller: controller,
                       segments: _segments,
                       labelStyle: const WheelLabelStyle(
-                        labelStyle: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                        // angle: 80.0, //for rotation of text.
+                          labelStyle: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          // angle: 77,
                       ),
+                      // slicePadding: const EdgeInsets.only(top: 10.0),
                       onComplete: (win, index) {
                         setState(() {
                           if (win.value == -9999) {

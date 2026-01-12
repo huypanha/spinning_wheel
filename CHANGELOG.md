@@ -21,4 +21,9 @@
 ## 0.0.6
 * **Advanced Label Styling**: Introduced `WheelLabelStyle` class for professional label configuration.
 * **Text Rotation**: Added `angle` support in `WheelLabelStyle` to allow manual rotation of segment labels.
-* **API Refactoring**: Renamed `labelStyle` (TextStyle) and `labelDesignConfig` to the unified `WheelLabelStyle` object for better extensibility.
+* **Refactoring**: Renamed `labelStyle` and `labelDesignConfig` to a unified `WheelLabelStyle` object.
+
+## 0.0.7
+* **Automatic Text Clipping**: Added `overflow` and `maxLines` to `WheelLabelStyle` for smart label containment.
+* **Slice Padding**: Upgraded `slicePadding` to use `EdgeInsets` for precise radial and horizontal control inside segments.
+* **Layout Optimization**: Text labels now automatically calculate available width to prevent slice overlapping.

@@ -51,6 +51,9 @@ class SpinnerWheel extends StatefulWidget {
   /// Whether to draw the default or provided background layer.
   final bool shouldDrawBackground;
 
+  /// Padding within segments for images and text.
+  final EdgeInsets slicePadding;
+
   /// Creates a [SpinnerWheel].
   const SpinnerWheel({
     super.key,
@@ -66,6 +69,7 @@ class SpinnerWheel extends StatefulWidget {
     this.labelStyle,
     this.background,
     this.shouldDrawBackground = true,
+    this.slicePadding = EdgeInsets.zero,
   });
 
   @override
@@ -134,6 +138,7 @@ class SpinnerWheelState extends State<SpinnerWheel>
       labelStyle: widget.labelStyle,
       background: widget.background,
       shouldDrawBackground: widget.shouldDrawBackground,
+      slicePadding: widget.slicePadding,
     );
   }
 }

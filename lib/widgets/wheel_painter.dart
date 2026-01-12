@@ -17,9 +17,15 @@ class WheelPainter extends CustomPainter {
   /// Configuration for the label style.
   final WheelLabelStyle? labelStyle;
 
+  /// Radial padding within segments.
+  final EdgeInsets slicePadding;
+
   /// Creates a [WheelPainter].
   WheelPainter(this.segments,
-      {this.imageHeight, this.imageWidth, this.labelStyle});
+      {this.imageHeight,
+      this.imageWidth,
+      this.labelStyle,
+      this.slicePadding = EdgeInsets.zero});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -54,7 +60,9 @@ class WheelPainter extends CustomPainter {
   void _drawImage(Canvas canvas, double radius, double angle,
       double segmentAngle, WheelSegment segment) {
     if (segment.image != null) {
-      final double imageRadius = radius * 0.55;
+      // Top padding pushes away from rim, bottom padding pushes away from center
+      final double imageRadius =
+          (radius * 0.55) - slicePadding.top + slicePadding.bottom;
       final Offset imageCenter = Offset(
         radius + cos(angle + segmentAngle / 2) * imageRadius,
         radius + sin(angle + segmentAngle / 2) * imageRadius,
@@ -79,7 +87,10 @@ class WheelPainter extends CustomPainter {
 
   void _drawLabel(Canvas canvas, double radius, double angle,
       double segmentAngle, WheelSegment segment) {
-    final double labelRadius = radius * 0.75;
+    // Top padding pushes away from rim, bottom pushes from center
+    final double labelRadius =
+        (radius * 0.75) - slicePadding.top + slicePadding.bottom;
+
     final Offset labelCenter = Offset(
       radius + cos(angle + segmentAngle / 2) * labelRadius,
       radius + sin(angle + segmentAngle / 2) * labelRadius,
@@ -92,6 +103,10 @@ class WheelPainter extends CustomPainter {
 
     final TextStyle? effectiveStyle = labelStyle?.labelStyle;
 
+    // Calculate available width at this radius minus horizontal padding
+    final double baseWidth = 2 * labelRadius * sin(segmentAngle / 2);
+    final double availableWidth = max(0.0, baseWidth - slicePadding.horizontal);
+
     TextPainter textPainter = TextPainter(
       text: TextSpan(
         text: segment.label,
@@ -100,9 +115,12 @@ class WheelPainter extends CustomPainter {
                 color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
       ),
       textDirection: TextDirection.ltr,
+      textAlign: TextAlign.center,
+      ellipsis: labelStyle?.overflow == TextOverflow.ellipsis ? '...' : null,
+      maxLines: labelStyle?.maxLines,
     );
 
-    textPainter.layout();
+    textPainter.layout(maxWidth: availableWidth);
     textPainter.paint(
         canvas, Offset(-textPainter.width / 2, -textPainter.height / 2));
     canvas.restore();
@@ -110,5 +128,7 @@ class WheelPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(WheelPainter oldDelegate) =>
-      oldDelegate.segments != segments || oldDelegate.labelStyle != labelStyle;
+      oldDelegate.segments != segments ||
+      oldDelegate.labelStyle != labelStyle ||
+      oldDelegate.slicePadding != slicePadding;
 }
