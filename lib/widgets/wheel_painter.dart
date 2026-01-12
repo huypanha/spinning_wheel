@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import '../models/wheel_segment.dart';
+import '../models/wheel_label_style.dart';
 
 /// Custom painter used to render the wheel segments, labels, and icons.
 class WheelPainter extends CustomPainter {
@@ -13,11 +14,12 @@ class WheelPainter extends CustomPainter {
   /// Custom width for segment icons.
   final double? imageWidth;
 
-  /// Text style for segment labels.
-  final TextStyle? style;
+  /// Configuration for the label style.
+  final WheelLabelStyle? labelStyle;
 
   /// Creates a [WheelPainter].
-  WheelPainter(this.segments, {this.imageHeight, this.imageWidth, this.style});
+  WheelPainter(this.segments,
+      {this.imageHeight, this.imageWidth, this.labelStyle});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -85,12 +87,15 @@ class WheelPainter extends CustomPainter {
 
     canvas.save();
     canvas.translate(labelCenter.dx, labelCenter.dy);
-    canvas.rotate(angle + segmentAngle / 2 + pi / 2);
+    canvas
+        .rotate(angle + segmentAngle / 2 + pi / 2 + (labelStyle?.angle ?? 0.0));
+
+    final TextStyle? effectiveStyle = labelStyle?.labelStyle;
 
     TextPainter textPainter = TextPainter(
       text: TextSpan(
         text: segment.label,
-        style: style ??
+        style: effectiveStyle ??
             const TextStyle(
                 color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
       ),
@@ -105,5 +110,5 @@ class WheelPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(WheelPainter oldDelegate) =>
-      oldDelegate.segments != segments;
+      oldDelegate.segments != segments || oldDelegate.labelStyle != labelStyle;
 }

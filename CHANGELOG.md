@@ -1,9 +1,7 @@
 ## 0.0.1
-
 * initial draft of the fortune wheel.
 
 ## 0.0.2
-
 * SetState issue of view fixed.
 
 ## 0.0.3
@@ -18,3 +16,9 @@
 ## 0.0.5
 * **Dual Image Support**: Pass both local asset paths and Network URLs (e.g., `https://...`) to `WheelSegment`.
 * Improved `image_loader` logic to automatically detect and fetch network images.
+* **Documentation Update**: Added comprehensive Dartdoc comments to improve pub.dev score.
+
+## 0.0.6
+* **Advanced Label Styling**: Introduced `WheelLabelStyle` class for professional label configuration.
+* **Text Rotation**: Added `angle` support in `WheelLabelStyle` to allow manual rotation of segment labels.
+* **API Refactoring**: Renamed `labelStyle` (TextStyle) and `labelDesignConfig` to the unified `WheelLabelStyle` object for better extensibility.

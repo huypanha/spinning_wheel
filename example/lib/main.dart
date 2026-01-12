@@ -258,17 +258,15 @@ class _GameScreenState extends State<GameScreen>
                     child: SpinnerWheel(
                       controller: controller,
                       segments: _segments,
-                      // shouldDrawBackground: false,
-                      // background: Image.asset('assets/images/test_wheel.png'),
-                      // background: Container(
-                      //   decoration: BoxDecoration(
-                      //       shape: BoxShape.circle,
-                      //     color: Colors.orange
-                      //   ),
-                      //   padding: EdgeInsets.all(20),
-                      // ),
+                      labelStyle: const WheelLabelStyle(
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                        // angle: 80.0, //for rotation of text.
+                      ),
                       onComplete: (win, index) {
-                        print("index......$index");
                         setState(() {
                           if (win.value == -9999) {
                             _score = 0;

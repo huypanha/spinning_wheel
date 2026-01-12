@@ -5,6 +5,7 @@ import '../core/spin_calculations.dart';
 import '../core/image_loader.dart';
 import '../widgets/wheel_display.dart';
 import '../models/wheel_segment.dart';
+import '../models/wheel_label_style.dart';
 import '../controller/spin_controller.dart';
 
 /// A customizable spinning wheel widget.
@@ -41,8 +42,8 @@ class SpinnerWheel extends StatefulWidget {
   /// The width of images displayed within segments.
   final double? imageWidth;
 
-  /// The text style for labels displayed on each segment.
-  final TextStyle? labelStyle;
+  /// Configuration for the label style (text style, angle, etc.).
+  final WheelLabelStyle? labelStyle;
 
   /// A custom background widget displayed behind the segments.
   final Widget? background;

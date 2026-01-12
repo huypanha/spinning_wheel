@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:spinning_wheel/widgets/wheel_painter.dart';
 import '../models/wheel_segment.dart';
+import '../models/wheel_label_style.dart';
 import 'indicator.dart';
 
 /// Internal widget that handles the layout and rendering of the wheel components.
@@ -36,8 +37,8 @@ class WheelDisplay extends StatelessWidget {
   /// Fixed width for segment images.
   final double? imageWidth;
 
-  /// Text style for segment labels.
-  final TextStyle? labelStyle;
+  /// Configuration for the label style.
+  final WheelLabelStyle? labelStyle;
 
   /// Minimum allowed size for the wheel.
   final double minSize;
@@ -149,7 +150,9 @@ class WheelDisplay extends StatelessWidget {
                         segments,
                         imageHeight: imageHeight ?? (size * 0.11),
                         imageWidth: imageWidth ?? (size * 0.11),
-                        style: _getResponsiveLabelStyle(size),
+                        labelStyle: labelStyle ??
+                            WheelLabelStyle(
+                                labelStyle: _getResponsiveLabelStyle(size)),
                       ),
                     ),
                   ),
@@ -250,7 +253,9 @@ class WheelDisplay extends StatelessWidget {
   }
 
   TextStyle? _getResponsiveLabelStyle(double size) {
-    if (labelStyle != null) return labelStyle;
+    if (labelStyle?.labelStyle != null) {
+      return labelStyle!.labelStyle;
+    }
 
     // Provide a default responsive text style
     return TextStyle(
