@@ -6,6 +6,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -342,8 +344,6 @@ class _GameScreenState extends State<GameScreen>
                       duration: Duration(milliseconds: 200),
                       height: 60,
                       width: 250,
-                      transform: Matrix4.identity()
-                        ..scale(_isSpinning ? 0.9 : 1.0),
                       child: ElevatedButton(
                         onPressed: _isSpinning ? null : _spinWheel,
                         style: ElevatedButton.styleFrom(
