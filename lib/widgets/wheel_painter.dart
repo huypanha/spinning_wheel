@@ -1,7 +1,9 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
-import '../models/wheel_segment.dart';
+
 import '../models/wheel_label_style.dart';
+import '../models/wheel_segment.dart';
 
 /// Custom painter used to render the wheel segments, labels, and icons.
 class WheelPainter extends CustomPainter {
@@ -21,32 +23,23 @@ class WheelPainter extends CustomPainter {
   final EdgeInsets slicePadding;
 
   /// Creates a [WheelPainter].
-  WheelPainter(this.segments,
-      {this.imageHeight,
-      this.imageWidth,
-      this.labelStyle,
-      this.slicePadding = EdgeInsets.zero});
+  WheelPainter(this.segments, {this.imageHeight, this.imageWidth, this.labelStyle, this.slicePadding = EdgeInsets.zero});
 
   @override
   void paint(Canvas canvas, Size size) {
     final double radius = size.width / 2;
-    final Rect rect =
-        Rect.fromCircle(center: Offset(radius, radius), radius: radius);
+    final Rect rect = Rect.fromCircle(center: Offset(radius, radius), radius: radius);
     final double segmentAngle = 2 * pi / segments.length;
     final double startAngle = -pi / 2 - segmentAngle / 40;
 
     for (int i = 0; i < segments.length; i++) {
-      _drawSegment(canvas, rect, startAngle + i * segmentAngle, segmentAngle,
-          segments[i]);
-      _drawImage(canvas, radius, startAngle + i * segmentAngle, segmentAngle,
-          segments[i]);
-      _drawLabel(canvas, radius, startAngle + i * segmentAngle, segmentAngle,
-          segments[i]);
+      _drawSegment(canvas, rect, startAngle + i * segmentAngle, segmentAngle, segments[i]);
+      _drawImage(canvas, radius, startAngle + i * segmentAngle, segmentAngle, segments[i]);
+      _drawLabel(canvas, radius, startAngle + i * segmentAngle, segmentAngle, segments[i]);
     }
   }
 
-  void _drawSegment(Canvas canvas, Rect rect, double angle, double segmentAngle,
-      WheelSegment segment) {
+  void _drawSegment(Canvas canvas, Rect rect, double angle, double segmentAngle, WheelSegment segment) {
     final Paint segmentPaint = Paint()
       ..style = PaintingStyle.fill
       ..shader = RadialGradient(
@@ -57,12 +50,10 @@ class WheelPainter extends CustomPainter {
     canvas.drawArc(rect, angle, segmentAngle, true, segmentPaint);
   }
 
-  void _drawImage(Canvas canvas, double radius, double angle,
-      double segmentAngle, WheelSegment segment) {
+  void _drawImage(Canvas canvas, double radius, double angle, double segmentAngle, WheelSegment segment) {
     if (segment.image != null) {
       // Top padding pushes away from rim, bottom padding pushes away from center
-      final double imageRadius =
-          (radius * 0.55) - slicePadding.top + slicePadding.bottom;
+      final double imageRadius = (radius * 0.55) - slicePadding.top + slicePadding.bottom;
       final Offset imageCenter = Offset(
         radius + cos(angle + segmentAngle / 2) * imageRadius,
         radius + sin(angle + segmentAngle / 2) * imageRadius,
@@ -72,8 +63,7 @@ class WheelPainter extends CustomPainter {
       canvas.translate(imageCenter.dx, imageCenter.dy);
       canvas.rotate(angle + segmentAngle / 2 + pi / 2);
 
-      final Rect srcRect = Rect.fromLTWH(0, 0, segment.image!.width.toDouble(),
-          segment.image!.height.toDouble());
+      final Rect srcRect = Rect.fromLTWH(0, 0, segment.image!.width.toDouble(), segment.image!.height.toDouble());
       final Rect dstRect = Rect.fromCenter(
         center: const Offset(0, 0),
         width: imageWidth ?? radius * 0.28,
@@ -85,11 +75,9 @@ class WheelPainter extends CustomPainter {
     }
   }
 
-  void _drawLabel(Canvas canvas, double radius, double angle,
-      double segmentAngle, WheelSegment segment) {
+  void _drawLabel(Canvas canvas, double radius, double angle, double segmentAngle, WheelSegment segment) {
     // Top padding pushes away from rim, bottom pushes from center
-    final double labelRadius =
-        (radius * 0.75) - slicePadding.top + slicePadding.bottom;
+    final double labelRadius = (radius * 0.75) - (slicePadding.top + slicePadding.bottom);
 
     final Offset labelCenter = Offset(
       radius + cos(angle + segmentAngle / 2) * labelRadius,
@@ -98,21 +86,18 @@ class WheelPainter extends CustomPainter {
 
     canvas.save();
     canvas.translate(labelCenter.dx, labelCenter.dy);
-    canvas
-        .rotate(angle + segmentAngle / 2 + pi / 2 + (labelStyle?.angle ?? 0.0));
+    canvas.rotate(angle + segmentAngle / 2 + pi / 2 + (labelStyle?.angle ?? 0.0));
 
     final TextStyle? effectiveStyle = labelStyle?.labelStyle;
 
     // Calculate available width at this radius minus horizontal padding
-    final double baseWidth = 2 * labelRadius * sin(segmentAngle / 2);
-    final double availableWidth = max(0.0, baseWidth - slicePadding.horizontal);
+    final double baseWidth = 2 * labelRadius * sin(segmentAngle * 0.7);
+    final double availableWidth = baseWidth;
 
     TextPainter textPainter = TextPainter(
       text: TextSpan(
         text: segment.label,
-        style: effectiveStyle ??
-            const TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+        style: effectiveStyle ?? const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
       ),
       textDirection: TextDirection.ltr,
       textAlign: TextAlign.center,
@@ -121,14 +106,10 @@ class WheelPainter extends CustomPainter {
     );
 
     textPainter.layout(maxWidth: availableWidth);
-    textPainter.paint(
-        canvas, Offset(-textPainter.width / 2, -textPainter.height / 2));
+    textPainter.paint(canvas, Offset(-textPainter.width * .7, -textPainter.height / 2));
     canvas.restore();
   }
 
   @override
-  bool shouldRepaint(WheelPainter oldDelegate) =>
-      oldDelegate.segments != segments ||
-      oldDelegate.labelStyle != labelStyle ||
-      oldDelegate.slicePadding != slicePadding;
+  bool shouldRepaint(WheelPainter oldDelegate) => oldDelegate.segments != segments || oldDelegate.labelStyle != labelStyle || oldDelegate.slicePadding != slicePadding;
 }
