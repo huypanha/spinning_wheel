@@ -1,12 +1,14 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
-import '../core/animation_handler.dart';
-import '../core/spin_calculations.dart';
-import '../core/image_loader.dart';
-import '../widgets/wheel_display.dart';
-import '../models/wheel_segment.dart';
-import '../models/wheel_label_style.dart';
+
+import 'package:flutter/material.dart';
+
 import '../controller/spin_controller.dart';
+import '../core/animation_handler.dart';
+import '../core/image_loader.dart';
+import '../core/spin_calculations.dart';
+import '../models/wheel_label_style.dart';
+import '../models/wheel_segment.dart';
+import '../widgets/wheel_display.dart';
 
 /// A customizable spinning wheel widget.
 ///
@@ -54,6 +56,9 @@ class SpinnerWheel extends StatefulWidget {
   /// Padding within segments for images and text.
   final EdgeInsets slicePadding;
 
+  /// Duration of spinning animation
+  final Duration? animateDuration;
+
   /// Creates a [SpinnerWheel].
   const SpinnerWheel({
     super.key,
@@ -70,6 +75,7 @@ class SpinnerWheel extends StatefulWidget {
     this.background,
     this.shouldDrawBackground = true,
     this.slicePadding = EdgeInsets.zero,
+    this.animateDuration = const Duration(seconds: 5),
   });
 
   @override
@@ -77,8 +83,7 @@ class SpinnerWheel extends StatefulWidget {
 }
 
 /// The state of the [SpinnerWheel] which manages animations and image loading.
-class SpinnerWheelState extends State<SpinnerWheel>
-    with SingleTickerProviderStateMixin {
+class SpinnerWheelState extends State<SpinnerWheel> with SingleTickerProviderStateMixin {
   /// The list of segments after their images have been loaded.
   List<WheelSegment> processedSegments = [];
   late AnimationController _controller;
@@ -94,7 +99,7 @@ class SpinnerWheelState extends State<SpinnerWheel>
         int wheelIndex = determineSegment(widget.segments, _endRotation);
         widget.onComplete(widget.segments[wheelIndex], wheelIndex);
       });
-    });
+    }, widget.animateDuration);
     super.initState();
   }
 

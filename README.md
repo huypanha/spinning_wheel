@@ -92,18 +92,19 @@ controller.startSpin();
 
 ### SpinnerWheel
 
-| Property            | Type                     | Description                                     | Default    |
-|---------------------|--------------------------|-------------------------------------------------|------------|
-| `controller`        | `SpinnerController`      | Controls the spin animation                     | Required   |
-| `segments`          | `List<WheelSegment>`     | List of wheel segments (labels, colors, images) | Required   |
-| `onComplete`        | `Function(WheelSegment, int)` | Callback triggered when spin completes    | Required   |
-| `labelStyle`        | `WheelLabelStyle?`       | Advanced styling for segment labels             | Optional   |
-| `slicePadding`      | `EdgeInsets`             | Padding inside slices (rim, center, and sides)  | `zero`     |
-| `wheelColor`        | `Color?`                 | Background color tint of the wheel              | Optional   |
-| `centerChild`       | `Widget?`                | Custom widget for the wheel center              | Optional   |
-| `indicator`         | `Widget?`                | Custom widget for the indicator                 | Optional   |
-| `background`        | `Widget?`                | Custom widget for the wheel background layer    | Optional   |
-| `shouldDrawBackground`| `bool`                 | Toggle background visibility                    | `true`     |
+| Property               | Type                          | Description                                     | Default     |
+|------------------------|-------------------------------|-------------------------------------------------|-------------|
+| `controller`           | `SpinnerController`           | Controls the spin animation                     | Required    |
+| `segments`             | `List<WheelSegment>`          | List of wheel segments (labels, colors, images) | Required    |
+| `onComplete`           | `Function(WheelSegment, int)` | Callback triggered when spin completes          | Required    |
+| `labelStyle`           | `WheelLabelStyle?`            | Advanced styling for segment labels             | Optional    |
+| `slicePadding`         | `EdgeInsets`                  | Padding inside slices (rim, center, and sides)  | `zero`      |
+| `wheelColor`           | `Color?`                      | Background color tint of the wheel              | Optional    |
+| `centerChild`          | `Widget?`                     | Custom widget for the wheel center              | Optional    |
+| `indicator`            | `Widget?`                     | Custom widget for the indicator                 | Optional    |
+| `background`           | `Widget?`                     | Custom widget for the wheel background layer    | Optional    |
+| `shouldDrawBackground` | `bool`                        | Toggle background visibility                    | `true`      |
+| `animateDuration`      | `Duration`                    | Duration of spinning animation                  | `5 seconds` |
 
 ### WheelLabelStyle
 
